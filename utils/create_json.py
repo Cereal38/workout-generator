@@ -41,3 +41,5 @@ def create_json(content: str) -> dict:
 
     # Add the images to the JSON object
     json_obj = add_images(json_obj)
+
+    return json_obj
