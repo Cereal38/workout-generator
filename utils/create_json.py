@@ -18,7 +18,7 @@ def add_images(json_obj: dict) -> dict:
 
     # For each exercise, get the images from the original JSON file and add them to the new JSON file
     for exercise in json_obj["exercises"]:
-        if exercise["type"] == "exercise":
+        if exercise["type"] == "exercise" and "id" in exercise:
             exercise["images"] = library[exercise["id"]]["images"]
 
     # Convert the Python object back to a JSON string and return it

@@ -11,13 +11,7 @@ def create_output_folder(json_obj: dict, output_path: str) -> None:
       json_obj (dict): The JSON object to be saved.
       output_path (str): The path to the output folder.
     """
-    # Remove the output folder if it already exists
-    if Path(output_path).exists():
-        for file in Path(output_path).iterdir():
-            file.unlink()
-        Path(output_path).rmdir()
-
-    # Create the output folder
+    # Create the output folder if it does not exist
     Path(output_path).mkdir(parents=True, exist_ok=True)
 
     # Save the JSON object to a file
@@ -29,6 +23,7 @@ def create_output_folder(json_obj: dict, output_path: str) -> None:
     for exercise in json_obj["exercises"]:
         if exercise["type"] == "exercise":
             for image in library[exercise["id"]]["images"]:
-                Path(output_path).joinpath(image).write_bytes(
-                    Path("../assets").joinpath(image).read_bytes(),
+                image_name: str = Path(image).name
+                Path(output_path).joinpath(image_name).write_bytes(
+                    Path("assets/exercises").joinpath(image).read_bytes(),
                 )
