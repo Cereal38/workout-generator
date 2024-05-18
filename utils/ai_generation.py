@@ -4,18 +4,19 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from get_prompts import get_script_prompt
 
 # from openai import OpenAI
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
+
+from utils.json_extract import json_extract
 
 MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
 MAX_TOKENS = 400
 
 
-def generate_script(instructions: str) -> str:
+def generate_workout(instructions: str) -> str:
     """Generate a workout following the instructions given by the user.
 
     Args:
@@ -31,6 +32,9 @@ def generate_script(instructions: str) -> str:
         sys.exit("Please provide the API key in the .env file.")
 
     client = MistralClient(api_key=api_key)
+
+    # Extract the exercises from the JSON file
+    exercises: list[dict[str, str]] = json_extract("exercises_simple.json")
 
     # Generate script
     messages = [
@@ -59,14 +63,16 @@ def generate_script(instructions: str) -> str:
                             ...
                         ]
                     }
-                    """,
+                    Here is the dictionnary of exercises you can use:
+                    """
+            + str(exercises),
         ),
     ]
     messages.append(ChatMessage(role="user", content=instructions))
-    response_script = client.chat(
+    response = client.chat(
         model=MODEL,
         max_tokens=MAX_TOKENS,
         messages=messages,
     )
 
-    return response_script.messages[-1].content
+    return response.choices[0].message.content

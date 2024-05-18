@@ -2,7 +2,7 @@
 
 import sys
 
-from utils.json_extract import json_extract
+from utils.ai_generation import generate_workout
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -10,5 +10,5 @@ if __name__ == "__main__":
     else:
         sys.exit("Please provide a sentence as an argument.")
 
-    # Extract the exercises from the JSON file
-    exercises: list[dict[str, str]] = json_extract("exercises_simple.json")
+    answer: str = generate_workout(sentence)
+    print(answer)
