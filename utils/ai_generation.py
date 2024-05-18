@@ -2,6 +2,7 @@
 
 import os
 import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -11,8 +12,8 @@ from mistralai.models.chat_completion import ChatMessage
 
 from utils.json_extract import json_extract
 
-MODEL = "open-mistral-7b"
-# MODEL = "open-mixtral-8x7b"
+# MODEL = "open-mistral-7b"
+MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
 MAX_TOKENS = 400
 INPUT_FILE = "exercises_simple.json"
@@ -83,7 +84,7 @@ def generate_workout(instructions: str) -> str:
                                 "reps": 15
                             },
                             {
-                                "name": "Passive rest",
+                                "name": "Rest",
                                 "type": "rest",
                                 "duration": 60
                             },
@@ -100,11 +101,12 @@ def generate_workout(instructions: str) -> str:
             + str(exercises),
         ),
     ]
+
     messages.append(ChatMessage(role="user", content=instructions))
+
     response = client.chat(
         model=MODEL,
-        # max_tokens=MAX_TOKENS,
-        response_format={"type": "json_object"},
+        max_tokens=MAX_TOKENS,
         messages=messages,
     )
 
