@@ -10,6 +10,8 @@ lint.ignore = [
   "FIX002", # Consider fixing issue
   "ANN101", # Missing type annotation for self in method (Deprecated)
   "FA102",  # Missing `from __future__ import annotations`, but uses PEP 585 collection
+  "E501",   # Line too long
+
 ]
 
 [tool.ruff.lint.pydocstyle]
