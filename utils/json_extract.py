@@ -17,11 +17,15 @@ def json_extract(input_file: str, no_equipment: bool = False) -> list[dict[str, 
     with Path(input_file).open() as f:
         data = json.load(f)
 
-    # If equipment is False, exclude exercises that require equipment
+    # If equipment is False, exclude exercises that require equipment and remove the equipment field
+    if no_equipment:
+        return [
+            {"name": exercise["name"]}
+            for exercise in data
+            if exercise["equipment"] is None or exercise["equipment"] == "body only"
+        ]
+
     return [
         {"name": exercise["name"], "equipment": exercise["equipment"]}
         for exercise in data
-        if not no_equipment
-        or exercise["equipment"] is None
-        or exercise["equipment"] == "body only"
     ]

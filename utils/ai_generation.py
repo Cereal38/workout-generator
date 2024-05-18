@@ -2,7 +2,6 @@
 
 import os
 import sys
-from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -15,9 +14,9 @@ from utils.json_extract import json_extract
 # MODEL = "open-mistral-7b"
 MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
-MAX_TOKENS = 400
-INPUT_FILE = "exercises_simple.json"
-# INPUT_FILE = "exercises.json"
+MAX_TOKENS = 500
+# INPUT_FILE = "exercises_simple.json"
+INPUT_FILE = "exercises.json"
 
 
 def generate_workout(instructions: str, no_equipment: bool = False) -> str:
@@ -40,6 +39,8 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
 
     # Extract the exercises from the JSON file
     exercises: list[dict[str, str]] = json_extract(INPUT_FILE, no_equipment)
+
+    print(len(exercises))
 
     # Generate script
     messages = [
