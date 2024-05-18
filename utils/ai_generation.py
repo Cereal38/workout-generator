@@ -40,8 +40,6 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
     # Extract the exercises from the JSON file
     exercises: list[dict[str, str]] = json_extract(INPUT_FILE, no_equipment)
 
-    print(len(exercises))
-
     # Generate script
     messages = [
         ChatMessage(
@@ -49,7 +47,9 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
             content="""You are an experimented sport coach.
                     You are doing this job for 10 years.
                     You got a dictionnary containing all the exercises you can use.
-                    You can also add rest between exercises.
+                    When you add an exercise (that is not a rest), you absolutely need to copy the exact same name from the given dictionnary.
+                    All exercises must come from the dictionnary and must be written exactly as they are (whole name).
+                    You can also add rest between exercises. But never add a rest at the end of a set.
                     You are creating a workout for a client.
                     The client is a 25 years old doint sport 3 durations a week.
                     The client will give you more informations about his workout in the next message, follow his instructions.
