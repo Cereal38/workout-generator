@@ -14,6 +14,8 @@ from utils.json_extract import json_extract
 MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
 MAX_TOKENS = 400
+# INPUT_FILE = "exercises_simple.json"
+INPUT_FILE = "exercises.json"
 
 
 def generate_workout(instructions: str) -> str:
@@ -34,7 +36,7 @@ def generate_workout(instructions: str) -> str:
     client = MistralClient(api_key=api_key)
 
     # Extract the exercises from the JSON file
-    exercises: list[dict[str, str]] = json_extract("exercises_simple.json")
+    exercises: list[dict[str, str]] = json_extract(INPUT_FILE)
 
     # Generate script
     messages = [
