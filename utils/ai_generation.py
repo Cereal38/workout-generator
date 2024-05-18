@@ -46,13 +46,12 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
             role="system",
             content="""You are an experimented sport coach.
                     You are doing this job for 10 years.
-                    You got a dictionnary containing all the exercises you can use.
-                    When you add an exercise (that is not a rest), you absolutely need to copy the exact same name from the given dictionnary.
-                    All exercises must come from the dictionnary and must be written exactly as they are (whole name) and with the same id as in the dictionnary.
-                    You can also add rest between exercises. But never add a rest at the end of a set.
                     You are creating a workout for a client.
                     The client is a 25 years old doint sport 3 durations a week.
                     The client will give you more informations about his workout in the next message, follow his instructions.
+                    You got a dictionnary containing all the exercises you can use. You're only allowed to use the exercises from this dictionnary.
+                    You can also add rest between exercises. But never add a rest at the end of a set.
+                    Because rest aren't in the dictionnaty, do not add an ID and imagine the rests name.
                     You must format your workout as a json file with the following structure:
                     {
                         "name": "Name of the workout",
@@ -68,7 +67,7 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                                 "reps": "Number of repetitions (int - only if metric is reps)",
                                 "duration": "Duration of the exercise (int in seconds - only if metric is duration or is it is a rest)",
                                 "distance": "Distance to cover (int in meters - only if metric is distance)",
-                                "id": "Id of the exercise (int - only if type is exercise)"
+                                "id": "Id of the exercise (Exact id from the dictionnary)"
                             },
                             ...
                         ]
