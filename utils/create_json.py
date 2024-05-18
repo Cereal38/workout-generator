@@ -28,7 +28,7 @@ def add_images(content: str) -> str:
     return json.dumps(json_obj, indent=2)
 
 
-def json_create(output_path: str, content: str) -> None:
+def create_json(output_path: str, content: str) -> None:
     """Creates a JSON file from a string.
 
     Args:

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 
-def json_extract(input_file: str, no_equipment: bool = False) -> list[dict[str, str]]:
+def get_exercices(input_file: str, no_equipment: bool = False) -> list[dict[str, str]]:
     """Extracts the name and if of each exercise from a JSON file.
 
     Args:

@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 
-from utils.json_extract import json_extract
+from utils.get_exercises import get_exercices
 
 # MODEL = "open-mistral-7b"
 MODEL = "open-mixtral-8x7b"
@@ -37,7 +37,7 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
     client = MistralClient(api_key=api_key)
 
     # Extract the exercises from the JSON file
-    exercises: list[dict[str, str]] = json_extract(INPUT_FILE, no_equipment)
+    exercises: list[dict[str, str]] = get_exercices(INPUT_FILE, no_equipment)
 
     # Generate script
     messages = [

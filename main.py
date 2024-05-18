@@ -3,7 +3,7 @@
 import argparse
 
 from utils.ai_generation import generate_workout
-from utils.json_create import json_create
+from utils.create_json import create_json
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -19,4 +19,4 @@ if __name__ == "__main__":
     no_equipment: bool = args.no_equipment
 
     answer: str = generate_workout(sentence, no_equipment)
-    json_create("workout.json", answer)
+    create_json("workout.json", answer)
