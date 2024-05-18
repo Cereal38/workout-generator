@@ -11,11 +11,12 @@ from mistralai.models.chat_completion import ChatMessage
 
 from utils.json_extract import json_extract
 
-MODEL = "open-mixtral-8x7b"
+MODEL = "open-mistral-7b"
+# MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
 MAX_TOKENS = 400
-# INPUT_FILE = "exercises_simple.json"
-INPUT_FILE = "exercises.json"
+INPUT_FILE = "exercises_simple.json"
+# INPUT_FILE = "exercises.json"
 
 
 def generate_workout(instructions: str) -> str:
@@ -45,24 +46,52 @@ def generate_workout(instructions: str) -> str:
             content="""You are an experimented sport coach.
                     You are doing this job for 10 years.
                     You got a dictionnary containing all the exercises you can use.
+                    You can also add rest between exercises.
                     You are creating a workout for a client.
-                    The client is a 25 years old doint sport 3 times a week.
+                    The client is a 25 years old doint sport 3 durations a week.
                     The client will give you more informations about his workout in the next message, follow his instructions.
                     You must format your workout as a json file with the following structure:
                     {
                         "name": "Name of the workout",
-                        "description": "Description of the workout",
                         "duration": "Estimated duration of the workout (int in seconds)",
-                        "diffulty": "Difficulty level of the workout (int from 1 to 5)",
+                        "difficulty": "Difficulty level of the workout (int from 1 to 5)",
+                        "number_of_sets": "Number of sets (int)",
+                        "rest_between_sets": "Rest duration between sets (int in seconds)",
                         "exercises": [
                             {
                                 "name": "Name of the exercise (Exact name from the dictionnary)",
-                                "type": "Type of the exercise (reps, time, distance, ...)",
-                                "reps": "Number of repetitions (int)",
-                                "time": "Duration of the exercise (int in seconds)",
-                                "distance": "Distance to cover (int in meters)",
+                                "type": "Type of the exercise (exercise, rest)",
+                                "metric": "Metric of the exercise (reps, duration, distance)",
+                                "reps": "Number of repetitions (int - only if metric is reps)",
+                                "duration": "Duration of the exercise (int in seconds - only if metric is duration or is it is a rest)",
+                                "distance": "Distance to cover (int in meters - only if metric is distance)",
                             },
                             ...
+                        ]
+                    }
+                    Here is an example of a workout (to show the structure):
+                    {
+                        "name": "Full body workout",
+                        "duration": 3600,
+                        "difficulty": 3,
+                        "number_of_sets": 3,
+                        "rest_between_sets": "Rest duration between sets (int in seconds)",
+                        "exercises": [
+                            {
+                                "name": "Push-ups",
+                                "type": "exercise",
+                                "reps": 15
+                            },
+                            {
+                                "name": "Passive rest",
+                                "type": "rest",
+                                "duration": 60
+                            },
+                            {
+                                "name": "Plank",
+                                "type": "exercise",
+                                "duration": 60
+                            }
                         ]
                     }
                     Your answer must contains only the workout, nothing else.
@@ -74,7 +103,8 @@ def generate_workout(instructions: str) -> str:
     messages.append(ChatMessage(role="user", content=instructions))
     response = client.chat(
         model=MODEL,
-        max_tokens=MAX_TOKENS,
+        # max_tokens=MAX_TOKENS,
+        response_format={"type": "json_object"},
         messages=messages,
     )
 

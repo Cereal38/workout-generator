@@ -12,7 +12,6 @@ def json_create(output_path: str, content: str) -> None:
     """
     # Remove everything before the first '{' character
     # And remove everything after the last '}' character
-
     content = content[content.find("{") : content.rfind("}") + 1]
 
     with Path(output_path).open("w") as f:
