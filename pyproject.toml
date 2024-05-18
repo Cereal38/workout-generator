@@ -1,0 +1,17 @@
+# Configuration for Ruff
+[tool.ruff]
+
+# Enable all rules by default.
+lint.select = ["ALL"]
+
+# Rules to exclude
+lint.ignore = [
+  "TD003",  # Missing issue links on TODO comments
+  "FIX002", # Consider fixing issue
+  "ANN101", # Missing type annotation for self in method (Deprecated)
+  "FA102",  # Missing `from __future__ import annotations`, but uses PEP 585 collection
+]
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings.
+convention = "google"
