@@ -48,7 +48,7 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                     You are doing this job for 10 years.
                     You got a dictionnary containing all the exercises you can use.
                     When you add an exercise (that is not a rest), you absolutely need to copy the exact same name from the given dictionnary.
-                    All exercises must come from the dictionnary and must be written exactly as they are (whole name).
+                    All exercises must come from the dictionnary and must be written exactly as they are (whole name) and with the same id as in the dictionnary.
                     You can also add rest between exercises. But never add a rest at the end of a set.
                     You are creating a workout for a client.
                     The client is a 25 years old doint sport 3 durations a week.
@@ -68,6 +68,7 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                                 "reps": "Number of repetitions (int - only if metric is reps)",
                                 "duration": "Duration of the exercise (int in seconds - only if metric is duration or is it is a rest)",
                                 "distance": "Distance to cover (int in meters - only if metric is distance)",
+                                "id": "Id of the exercise (int - only if type is exercise)"
                             },
                             ...
                         ]
@@ -81,9 +82,10 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                         "rest_between_sets": "Rest duration between sets (int in seconds)",
                         "exercises": [
                             {
-                                "name": "Push-ups",
+                                "name": "Pushups",
                                 "type": "exercise",
-                                "reps": 15
+                                "reps": 15,
+                                "id": 567
                             },
                             {
                                 "name": "Rest",
@@ -93,7 +95,8 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                             {
                                 "name": "Plank",
                                 "type": "exercise",
-                                "duration": 60
+                                "duration": 60,
+                                "id": 538
                             }
                         ]
                     }
