@@ -19,4 +19,4 @@ if __name__ == "__main__":
     no_equipment: bool = args.no_equipment
 
     answer: str = generate_workout(sentence, no_equipment)
-    create_json("workout.json", answer)
+    json_obj: dict = create_json(answer)
