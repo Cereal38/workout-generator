@@ -20,5 +20,9 @@ if __name__ == "__main__":
     no_equipment: bool = args.no_equipment
 
     answer: str = generate_workout(sentence, no_equipment)
+    print("ANSWER:", answer)
+    print("")
     json_obj: dict = create_json(answer)
+    print("JSON OBJ:", json_obj)
+    print("")
     create_output_folder(json_obj, "workout")
