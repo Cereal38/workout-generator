@@ -3,6 +3,7 @@
 import sys
 
 from utils.ai_generation import generate_workout
+from utils.json_create import json_create
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -11,4 +12,4 @@ if __name__ == "__main__":
         sys.exit("Please provide a sentence as an argument.")
 
     answer: str = generate_workout(sentence)
-    print(answer)
+    json_create("workout.json", answer)
