@@ -15,7 +15,6 @@ from utils.json_extract import json_extract
 MODEL = "open-mixtral-8x7b"
 # MODEL = "mistral-large-latest"
 MAX_TOKENS = 500
-# INPUT_FILE = "exercises_simple.json"
 INPUT_FILE = "exercises.json"
 
 
