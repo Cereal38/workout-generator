@@ -36,6 +36,9 @@ def create_json(content: str) -> dict:
     # And remove everything after the last '}' character
     content = content[content.find("{") : content.rfind("}") + 1]
 
+    # Remove all the "\" characters
+    content = content.replace("\\", "")
+
     # Convert to a Python object
     json_obj: dict = json.loads(content)
 
