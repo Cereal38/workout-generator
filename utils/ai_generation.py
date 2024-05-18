@@ -50,19 +50,20 @@ def generate_workout(instructions: str) -> str:
                     {
                         "name": "Name of the workout",
                         "description": "Description of the workout",
-                        "duration": "Estimated duration of the workout",
-                        "diffulty": "Difficulty level of the workout (1 to 5)",
+                        "duration": "Estimated duration of the workout (int in seconds)",
+                        "diffulty": "Difficulty level of the workout (int from 1 to 5)",
                         "exercises": [
                             {
                                 "name": "Name of the exercise (Exact name from the dictionnary)",
                                 "type": "Type of the exercise (reps, time, distance, ...)",
-                                "reps": "Number of repetitions (if type is reps)",
-                                "time": "Duration of the exercise (if type is time)",
-                                "distance": "Distance to cover (if type is distance)",
+                                "reps": "Number of repetitions (int)",
+                                "time": "Duration of the exercise (int in seconds)",
+                                "distance": "Distance to cover (int in meters)",
                             },
                             ...
                         ]
                     }
+                    Your answer must contains only the workout, nothing else.
                     Here is the dictionnary of exercises you can use:
                     """
             + str(exercises),
