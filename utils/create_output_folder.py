@@ -30,5 +30,5 @@ def create_output_folder(json_obj: dict, output_path: str) -> None:
         if exercise["type"] == "exercise":
             for image in library[exercise["id"]]["images"]:
                 Path(output_path).joinpath(image).write_bytes(
-                    Path("assets").joinpath(image).read_bytes(),
+                    Path("../assets").joinpath(image).read_bytes(),
                 )
