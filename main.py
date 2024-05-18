@@ -1,15 +1,22 @@
 """Create a workout."""
 
-import sys
+import argparse
 
 from utils.ai_generation import generate_workout
 from utils.json_create import json_create
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        sentence = sys.argv[1]
-    else:
-        sys.exit("Please provide a sentence as an argument.")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("sentence", help="The sentence for workout generation")
+    parser.add_argument(
+        "--no-equipment",
+        action="store_true",
+        help="Generate a workout without equipment",
+    )
+    args = parser.parse_args()
 
-    answer: str = generate_workout(sentence)
+    sentence = args.sentence
+    no_equipment: bool = args.no_equipment
+
+    answer: str = generate_workout(sentence, no_equipment)
     json_create("workout.json", answer)

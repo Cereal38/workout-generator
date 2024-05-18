@@ -20,11 +20,12 @@ INPUT_FILE = "exercises_simple.json"
 # INPUT_FILE = "exercises.json"
 
 
-def generate_workout(instructions: str) -> str:
+def generate_workout(instructions: str, no_equipment: bool = False) -> str:
     """Generate a workout following the instructions given by the user.
 
     Args:
         instructions (str): The instructions provided by the user.
+        no_equipment (bool): Whether the exercises should require equipment.
 
     Returns:
         str: The generated workout.
@@ -38,7 +39,7 @@ def generate_workout(instructions: str) -> str:
     client = MistralClient(api_key=api_key)
 
     # Extract the exercises from the JSON file
-    exercises: list[dict[str, str]] = json_extract(INPUT_FILE)
+    exercises: list[dict[str, str]] = json_extract(INPUT_FILE, no_equipment)
 
     # Generate script
     messages = [
