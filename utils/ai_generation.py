@@ -49,7 +49,8 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                     The client is a 25 years old doint sport 3 durations a week.
                     The client will give you more informations about his workout in the next message, follow his instructions.
                     You got a dictionnary containing all the exercises you can use. You're only allowed to use the exercises from this dictionnary.
-                    You can also add rest between exercises. But never add a rest at the end of a set.
+                    You can also add rest between exercises.
+                    A set must end with an exercise.
                     Because rest aren't in the dictionnaty, do not add an ID and imagine the rests name.
                     You must format your workout as a json file with the following structure:
                     {
