@@ -44,23 +44,27 @@ def generate_markdown(json_obj: dict, output_path: str) -> None:
         file.write("# " + json_obj["name"] + "\n\n")
 
         file.write("## Infos\n")
-        file.write("- **Duration**: " + json_obj["duration"] + "\n")
-        file.write("- **Difficulty**: " + json_obj["difficulty"] + "\n")
-        file.write("- **Number of sets**: " + json_obj["sets"] + "\n")
-        file.write("- **Rest between sets**: " + json_obj["rest"] + "\n")
+        file.write("- **Duration**: " + str(json_obj["duration"]) + "seconds\n")
+        file.write("- **Difficulty**: " + str(json_obj["difficulty"]) + "\n")
+        file.write("- **Number of sets**: " + str(json_obj["sets"]) + "\n")
+        file.write("- **Rest between sets**: " + str(json_obj["rest"]) + "seconds\n")
 
         file.write("\n## Exercises\n")
         for exercise in json_obj["exercises"]:
             if exercise["type"] == "exercise":
                 file.write("### " + exercise["name"] + "\n")
                 if exercise["metric"] == "reps":
-                    file.write("- **Reps**: " + exercise["reps"] + "\n")
+                    file.write("- **Reps**: " + str(exercise["reps"]) + "\n")
                 elif exercise["metric"] == "duration":
-                    file.write("- **Duration**: " + exercise["duration"] + "\n")
+                    file.write(
+                        "- **Duration**: " + str(exercise["duration"]) + "seconds\n",
+                    )
                 elif exercise["metric"] == "distance":
-                    file.write("- **Distance**: " + exercise["distance"] + "\n")
+                    file.write(
+                        "- **Distance**: " + str(exercise["distance"]) + "meters\n",
+                    )
                 file.write("\n")
             elif exercise["type"] == "rest":
                 file.write("### " + exercise["name"] + "\n")
-                file.write("- **Duration**: " + exercise["duration"] + "\n")
+                file.write("- **Duration**: " + str(exercise["duration"]) + "seconds\n")
                 file.write("\n")
