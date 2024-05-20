@@ -4,7 +4,7 @@ import argparse
 
 from utils.ai_generation import generate_workout
 from utils.create_json import create_json
-from utils.create_output_folder import create_output_folder
+from utils.create_output import create_output
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -21,4 +21,4 @@ if __name__ == "__main__":
 
     answer: str = generate_workout(sentence, no_equipment)
     json_obj: dict = create_json(answer)
-    create_output_folder(json_obj, "workout")
+    create_output(json_obj, "workout")

@@ -56,8 +56,8 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                         "name": "Name of the workout",
                         "duration": "Estimated duration of the workout (int in seconds)",
                         "difficulty": "Difficulty level of the workout (int from 1 to 5)",
-                        "number_of_sets": "Number of sets (int)",
-                        "rest_between_sets": "Rest duration between sets (int in seconds)",
+                        "sets": "Number of sets (int)",
+                        "rest": "Rest duration between sets (int in seconds)",
                         "exercises": [
                             {
                                 "name": "Name of the exercise (Exact name from the dictionnary)",
@@ -76,12 +76,13 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                         "name": "Full body workout",
                         "duration": 3600,
                         "difficulty": 3,
-                        "number_of_sets": 3,
-                        "rest_between_sets": "Rest duration between sets (int in seconds)",
+                        "sets": 3,
+                        "rest": "Rest duration between sets (int in seconds)",
                         "exercises": [
                             {
                                 "name": "Pushups",
                                 "type": "exercise",
+                                "metric": "reps",
                                 "reps": 15,
                                 "id": 567
                             },
@@ -93,6 +94,7 @@ def generate_workout(instructions: str, no_equipment: bool = False) -> str:
                             {
                                 "name": "Plank",
                                 "type": "exercise",
+                                "metric": "duration",
                                 "duration": 60,
                                 "id": 538
                             }
