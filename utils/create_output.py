@@ -57,37 +57,19 @@ def generate_markdown(json_obj: dict, output_path: str) -> None:
         file.write("\n## Exercises\n")
         for exercise in json_obj["exercises"]:
             if exercise["type"] == "exercise":
-                file.write("### " + exercise["name"] + "\n")
+                file.write("### " + exercise["name"])
                 if exercise["metric"] == "reps":
-                    file.write("- **Reps**: " + str(exercise["reps"]) + "\n")
+                    file.write(" (" + str(exercise["reps"]) + " reps)\n")
                 elif exercise["metric"] == "duration":
-                    file.write(
-                        "- **Duration**: " + str(exercise["duration"]) + " seconds\n",
-                    )
+                    file.write(" (" + str(exercise["duration"]) + " seconds)\n")
                 elif exercise["metric"] == "distance":
-                    file.write(
-                        "- **Distance**: " + str(exercise["distance"]) + " meters\n",
-                    )
-                # Add images
-                #         {
-                #     "name": "Pushups",
-                #     "type": "exercise",
-                #     "metric": "reps",
-                #     "reps": 15,
-                #     "id": 567,
-                #     "images": [
-                #         "Pushups/0.jpg",
-                #         "Pushups/1.jpg"
-                #     ]
-                # },
+                    file.write(" (" + str(exercise["distance"]) + " meters)\n")
                 for image in exercise["images"]:
                     file.write(
                         "![Image](./" + image + ")\n",
                     )
                 file.write("\n")
             elif exercise["type"] == "rest":
-                file.write("### " + exercise["name"] + "\n")
-                file.write(
-                    "- **Duration**: " + str(exercise["duration"]) + " seconds\n",
-                )
+                file.write("### " + exercise["name"])
+                file.write(" (" + str(exercise["duration"]) + " seconds)\n")
                 file.write("\n")
